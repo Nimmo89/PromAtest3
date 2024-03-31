@@ -1,3 +1,8 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class AnimalRegistry {
     private static final String DB_URL = "jdbc:mysql://localhost/FriendsOfHumans";
     private static final String USER = "kpa";
