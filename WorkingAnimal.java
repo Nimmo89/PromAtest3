@@ -4,7 +4,7 @@ public class WorkingAnimal extends Animal {
 
     // Конструктор
     public WorkingAnimal(String name, String command, String birthDate, int loadCapacity) {
-        super(name, command, birthDate);
+        super(name, birthDate);
         this.loadCapacity = loadCapacity;
     }
 
