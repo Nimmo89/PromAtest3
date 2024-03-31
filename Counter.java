@@ -9,10 +9,14 @@ public class Counter implements AutoCloseable {
         count++;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     @Override
-    public void close() throws Exception {
+    public void close() {
         if (count == 0) {
-            throw new Exception("Ресурс не используется.");
+            throw new IllegalStateException("Ресурс остался открыт или работа с объектом типа Counter не была в блоке try-with-resources.");
         }
     }
 }

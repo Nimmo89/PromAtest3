@@ -25,6 +25,12 @@ public class Main {
                     String breed = scanner.nextLine();
                     registry.addAnimal(new DomesticAnimal(name, breed, name, name));
                     System.out.println("Животное успешно зарегистрировано.");
+                    try (Counter counter = new Counter()) {
+                        // Действия, при которых увеличивается значение счетчика
+                        counter.add();
+                    } catch (Exception e) {
+                        System.out.println("Произошла ошибка: " + e.getMessage());
+                    }
                     break;
                 case 2:
                     registry.listAllAnimals();
