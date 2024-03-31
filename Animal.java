@@ -1,13 +1,19 @@
+import java.util.ArrayList;
 public class Animal {
     private String name;
-    private String command;
+    private ArrayList<String> commands;
     private String birthDate;
 
     // Конструктор
-    public Animal(String name, String command, String birthDate) {
+    public Animal(String name, String birthDate) {
         this.name = name;
-        this.command = command;
+        this.commands = new ArrayList<>();
         this.birthDate = birthDate;
+    }
+
+    // Метод для добавления команды
+    public void addCommand(String command) {
+        commands.add(command);
     }
 
     // Геттеры и сеттеры для полей
@@ -19,12 +25,12 @@ public class Animal {
         this.name = name;
     }
 
-    public String getCommand() {
-        return command;
-    }
-
-    public void setCommand(String command) {
-        this.command = command;
+    // Метод для вывода списка команд
+    public void listCommands() {
+        System.out.println("Список команд для " + name + ":");
+        for (String command : commands) {
+            System.out.println(command);
+        }
     }
 
     public String getBirthDate() {
