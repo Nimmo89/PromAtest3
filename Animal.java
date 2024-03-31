@@ -40,4 +40,8 @@ public class Animal {
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
+
+    public String getAnimalClass() {
+        return "Домашнее животное";
+    }
 }

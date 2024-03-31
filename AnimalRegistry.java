@@ -1,37 +1,46 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AnimalRegistry {
-    private static final String DB_URL = "jdbc:mysql://localhost/FriendsOfHumans";
-    private static final String USER = "kpa";
-    private static final String PASSWORD = "kpa11";
+    private ArrayList<Animal> animals;
 
-    // Метод для добавления животного в базу данных
-    public void addAnimal(String animalType, String name, String command, String birthDate) {
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-            String query = "INSERT INTO ";
-            if (animalType.equals("Domestic"))
-                query += "DomesticAnimals ";
-            else if (animalType.equals("Working"))
-                query += "WorkingAnimals ";
-            else {
-                System.out.println("Неизвестный тип животного.");
-                return;
-            }
-            query += "(animal_type, name, command, birth_date) VALUES (?, ?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, animalType);
-            preparedStatement.setString(2, name);
-            preparedStatement.setString(3, command);
-            preparedStatement.setString(4, birthDate);
-            preparedStatement.executeUpdate();
-            System.out.println("Животное добалено.");
-        } catch (SQLException e) {
-            e.printStackTrace();
+    // Конструктор
+    public AnimalRegistry() {
+        this.animals = new ArrayList<>();
+    }
+
+    // Метод для добавления нового животного
+    public void addAnimal(Animal animal) {
+        animals.add(animal);
+    }
+
+    // Метод для вывода списка всех животных
+    public void listAllAnimals() {
+        System.out.println("Список всех зарегистрированных животных:");
+        for (Animal animal : animals) {
+            System.out.println(animal.getAnimalClass() + ": " + animal.getName());
         }
     }
 
-    // Другие методы для работы с реестром
+    // Метод для вывода списка команд для конкретного животного
+    public void listCommands(String animalName) {
+        for (Animal animal : animals) {
+            if (animal.getName().equals(animalName)) {
+                animal.listCommands();
+                return;
+            }
+        }
+        System.out.println("Животное с таким именем не найдено.");
+    }
+
+    // Метод для обучения животного новой команде
+    public void teachCommand(String animalName, String command) {
+        for (Animal animal : animals) {
+            if (animal.getName().equals(animalName)) {
+                animal.addCommand(command);
+                System.out.println("Команда успешно добавлена для " + animal.getName());
+                return;
+            }
+        }
+        System.out.println("Животное с таким именем не найдено.");
+    }
 }
